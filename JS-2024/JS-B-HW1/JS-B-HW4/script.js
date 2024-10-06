@@ -54,7 +54,6 @@ let estimatedCost = Math.floor((milkPrice + toastPrice) * sale / 100);
 
 while (1 == 1) {
     if (wallet < estimatedCost) {
-        console.log("wallet: " + wallet);
         break;
     }
     wallet -= estimatedCost;
