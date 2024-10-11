@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-size: 2rem;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        margin: 0 auto;
+    }
+
+    .flex-x-center {
+
+
+        justify-content: center;
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .row>* {
+        width: 50%;
+        padding: 10px;
+        border: 1px solid black;
+    }
+
+    .message {
+        margin: 5rem;
+        font-size: 2rem;
+        white-space: pre;
+    }
+</style>
+
+<body>
+    <!-- ======================================================================================= -->
+    <div id="table" class="container">
+        <div class="row">
+            <div class="col">TEST</div>
+            <div class="col">TEST_STRING</div>
+        </div>
+    </div>
+    <!-- ======================================================================================= -->
+    <script>
+        let message = "";
+        let test = "TEST";
+        writeCol(test); // string
+
+        let num = 100;
+        writeCol(num); // number
+
+        let json = {
+            "PKNO": "1"
+        };
+        writeCol(json); // object
+
+        let map = new Map();
+        map.set("PKNO", "1");
+        writeCol(map); // object
+
+        let array = new Array();
+        array.push("TEST");
+        array.push("APPLE");
+        writeCol(array); // obejct
+
+        let hasExist = false;
+        writeCol(hasExist); // boolean
+
+        let num2 = new Number(100);
+        writeCol(num2); // object
+
+        // let func = writeCol;
+        // writeCol(func); // function
+
+        let the_null = null;
+        writeCol(the_null); // function
+
+        let the_nan = new Number("TEST");
+        writeCol(the_nan); // function
+
+        // =======================================================================================
+        writeCol("==================");
+        let the_num1 = new Number(1);
+        let the_num2 = new Number("test");
+        let the_num3 = parseInt(1);
+        let the_num4 = parseInt("test");
+        writeCol(the_num1);
+        writeCol(the_num2);
+        writeCol(the_num3);
+        writeCol(the_num4);
+
+        function writeCol(obj) {
+            let row = document.createElement("div");
+            row.className = "row";
+
+            let cols = [obj, typeof obj];
+            for (let i = 0; i < cols.length; i++) {
+                let col = document.createElement("div");
+                col.className = "col";
+                col.textContent = cols[i];
+                row.append(col);
+            }
+
+            document.getElementById("table").append(row);
+            console.table(cols);
+        }
+
+        function processClear() {
+            document.getElementById("table").innerHTML = "";
+            console.clear();
+        }
+        // =======================================================================================
+        processClear();
+        processUseStrict();
+        function processUseStrict() {
+            a = "test";
+            b = "abc";
+            "use strict";
+            console.log(a);
+            console.log(b); // not defind
+        }        
+    </script>
+</body>
+
+</html>
