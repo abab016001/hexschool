@@ -1,67 +1,179 @@
-// 第一題
-/*
-「阿貓與阿狗玩棒球，要記錄比分」
-流程一：第一回合，阿貓得 3 分，阿狗得 2 分
-流程二：第二回合，阿貓得 20 分，阿狗得 3 分
-流程三：中間有插曲，就是阿貓作弊，第二回合才得 2 分卻謊報 20 分，所以必須扣掉 18 分
-流程四：第三回合，阿貓得 1 分，阿狗得 7 分
-*/
-let roundNum = 0;
-let catScore = 0;
-let dogScore = 0;
-// 程式碼開始填寫處
-catScore += 3;
-dogScore += 2;
-roundNum++;
+// ==== 字串相加 ==== 
+//input
+talk("早安");
+talk("晚安");
 
-catScore += 20;
-dogScore += 3;
-roundNum++;
+// output
+// "hi，早安"
+// "hi，晚安"
 
-catScore -= 18;
-
-catScore += 1;
-dogScore += 7;
-roundNum++;
-// 程式碼結束處
-// 顯示雙方總得分，console 應印出阿貓 6 分、阿狗 12 分
-console.log(`總得分：阿貓 ${catScore} 分、阿狗 ${dogScore} 分`);
-// 顯示比了幾回合
-console.log(`總共比了 ${roundNum} 回合`);
-
-
-
-
-
-// 第二題
-// 鍛鍊：拆解任務流程與設定變數
-/*
-「幫媽媽跑腿，紀錄花了多少錢，與跑腿了幾次」 
-小明的媽媽請她跑腿，小明和媽媽說最多跑三次腿 
-小明媽給了小明 300 元，請他去買兩罐牛奶跟兩份吐司，小明到超商後看到牛奶 30 元吐司 20 元 
-當她到櫃台結帳時，櫃台告訴他剛好今天全部品項都打 5 折 ! 
-買回家後，媽媽發現小明的東西都有買齊，就讓小明去玩耍了。
-*/// 請試著拆解流程，並透過註解告知您的解題流程
-// 最後兩行 code 請用 console.log 印出最後小明花完剩下多少錢，以及當天還能跑腿幾次的變數
-// 最後提交 Codepen 連結給我們檢視
-const milkPrice = 30;
-const toastPrice = 20;
-const sale = 50;
-let wallet = 300;
-let currentRound = 0;
-let yetRound = 0;
-let estimatedCost = Math.floor((milkPrice + toastPrice) * sale / 100);
-
-while (1 == 1) {
-    if (wallet < estimatedCost) {
-        break;
-    }
-    wallet -= estimatedCost;
-    if (++currentRound >= 3) {
-        break;
-    }
+function talk(content) {
+    let textContent = `hi, ${content}`;
+    Utility.createChild("STRING_APPEND", "div", textContent);
 }
 
-yetRound = Math.floor(wallet / estimatedCost);
+// ==== 數字處理 ==== 
 
-//console.log(`最後小明花完剩下${wallet}元，當天還能跑腿${yetRound}次`);
+let data = 0;
+
+//input
+count(2);
+count(3);
+count(5);
+
+// output
+//2
+//5
+//10
+
+function count(number) {
+    data += number;
+    Utility.createChild("NUMNER_PROCESS", "div", data);
+}
+
+// ==== 數字 ==== 
+
+//input
+count2(2); 
+count2(3); 
+count2(5); 
+
+// output
+// 4
+// 9
+//25
+
+function count2(number) {
+    const rtn = Math.pow(number,2);
+    Utility.createChild("NUMNER", "div", rtn);
+}
+
+// ==== 兩位數四舍五入 ==== 
+
+//input
+twoFixed(1.8888) 
+twoFixed(3.1234)
+
+// output
+// 1.89
+// 3.12
+
+function twoFixed(number) {
+    let rtn = Math.round(number*100) / 100;
+    Utility.createChild("TWO_FIXED", "div", rtn);
+}
+
+// ==== BMI ==== 
+
+//input
+calcBmi(178,69) 
+
+//output
+//21.78
+
+function calcBmi(height_cm, weight_kg) {
+    const w = weight_kg;
+    const h = height_cm / 100;
+    let rtn = w / (Math.pow(h,2));
+    rtn = Math.round(rtn*100) / 100;
+    Utility.createChild("BMI", "div", rtn);
+}
+
+// ==== 檢查是否需要帶雨具+if ==== 
+
+//input
+checkWeather("雨天"); 
+checkWeather("晴天"); 
+
+// output
+// 要帶雨具
+// 不用帶雨具
+
+function checkWeather(str) {
+    let rtn = "";
+    if (str == "雨天") {
+        rtn = "要帶雨具";
+    } else if (str == "晴天") {
+        rtn = "不用帶雨具";
+    }
+    Utility.createChild("IF", "div", rtn);
+}
+
+// ==== 增加陣列資料 ==== 
+let data1 = [];
+
+//input
+add1("hello"); 
+add1("你好嗎？"); 
+
+// output 
+// ["hello","你好嗎？"]
+
+function add1(str) {
+    data1.push(str);
+    const rtn = `["${data1.join("\",\"")}"]`;
+    Utility.createChild("ARRAY_PUSH", "div", rtn);
+}
+
+// ==== 增加陣列物件資料 ==== 
+
+let data2 = [];
+
+//input
+add2("洧杰","男生"); 
+add2("葉子","女生"); 
+
+// output 
+//[
+// {name:"洧杰",gender:"男生"},
+// {name:"葉子",gender:"女生"}
+//]
+
+function add2(name, gender) {
+    data2.push({"name": name, "gender":gender});
+    let objArray = [];
+    data2.forEach(item => {
+        objArray.push(JSON.stringify(item));
+    });
+    const rtn = `[${objArray.join(",")}]`;
+    Utility.createChild("ARRAY_PUSH_OBJ", "div", rtn);
+}
+
+// ==== 取物件資料 ==== 
+
+const bmiStatesData = {
+    overThin: {
+      state: "過輕",
+      color: "藍色"
+    },
+    normal: {
+      state: "正常",
+      color: "紅色"
+    }
+  }
+  // input
+  checkBmiStates("overThin"); 
+  checkBmiStates("normal"); 
+  
+  // output 
+  // 你的體重過輕，指數為藍色
+  // 你的體重正常，指數為紅色
+
+  function checkBmiStates(str) {
+    const rtn = `你的體重${bmiStatesData[str].state}, 指數為${bmiStatesData[str].color}`;
+    Utility.createChild("GET_OBJ", "div", rtn);
+  }
+
+  // ==== 週末任務 ==== 
+
+  // 題目：攝氏轉華氏溫度
+  // input
+ convertCtoF(25)
+
+ // output
+ // 77
+
+ function convertCtoF(c) {
+    const rtn = Math.round(((c*9/5) + 32));
+    Utility.createChild("C_TO_F", "div", rtn);
+ }
