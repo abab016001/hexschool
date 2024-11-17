@@ -60,6 +60,11 @@ const processAddSave = (e) => {
 };
 
 const renderChart = (data, column) => {
+    if (!data || data.length == 0) {
+        document.getElementById("chart").style.display = "none";
+    } else {
+        document.getElementById("chart").style.display = "block";
+    }
     const colMap = {};
     const colList = [];
     data.forEach(item=>{
